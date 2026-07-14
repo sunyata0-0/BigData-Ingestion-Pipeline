@@ -50,6 +50,7 @@ services:
 
     volumes:
       - ./nifi/extensions:/opt/nifi/nifi-current/nar_extensions
+      - nifi_conf:/opt/nifi/nifi-current/conf
       - nifi_state:/opt/nifi/nifi-current/state
       - nifi_database:/opt/nifi/nifi-current/database_repository
       - nifi_flowfile:/opt/nifi/nifi-current/flowfile_repository
@@ -58,6 +59,7 @@ services:
 
 volumes:
   mysql_data:
+  nifi_conf:
   nifi_state:
   nifi_database:
   nifi_flowfile:
