@@ -1,0 +1,36 @@
+[ {
+  "id" : 1,
+  "first_name" : "Alice",
+  "last_name" : "Smith",
+  "department" : "IT",
+  "salary" : "4500.00",
+  "hire_date" : "1673737200000"
+}, {
+  "id" : 2,
+  "first_name" : "Bob",
+  "last_name" : "Johnson",
+  "department" : "HR",
+  "salary" : "3900.00",
+  "hire_date" : "1668034800000"
+}, {
+  "id" : 3,
+  "first_name" : "Charlie",
+  "last_name" : "Brown",
+  "department" : "Finance",
+  "salary" : "5200.00",
+  "hire_date" : "1625094000000"
+}, {
+  "id" : 4,
+  "first_name" : "David",
+  "last_name" : "Wilson",
+  "department" : "IT",
+  "salary" : "6100.00",
+  "hire_date" : "1584572400000"
+}, {
+  "id" : 5,
+  "first_name" : "Emma",
+  "last_name" : "Jones",
+  "department" : "Marketing",
+  "salary" : "4300.00",
+  "hire_date" : "1709074800000"
+} ]

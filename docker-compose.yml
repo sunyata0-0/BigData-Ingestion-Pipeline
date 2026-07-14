@@ -49,13 +49,51 @@ services:
       NIFI_WEB_PROXY_HOST: localhost:8444
 
     volumes:
+      - ./data:/data
       - ./nifi/extensions:/opt/nifi/nifi-current/nar_extensions
+      - ./nifi/jdbc:/opt/nifi/nifi-current/jdbc
+      - ./hadoop/config:/opt/nifi/hadoop-conf
       - nifi_conf:/opt/nifi/nifi-current/conf
       - nifi_state:/opt/nifi/nifi-current/state
       - nifi_database:/opt/nifi/nifi-current/database_repository
       - nifi_flowfile:/opt/nifi/nifi-current/flowfile_repository
       - nifi_content:/opt/nifi/nifi-current/content_repository
       - nifi_provenance:/opt/nifi/nifi-current/provenance_repository
+
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+
+    restart: unless-stopped
+
+    ports:
+      - "9870:9870"
+      - "9000:9000"
+
+    environment:
+      - CLUSTER_NAME=bigdata
+
+    env_file:
+      - ./hadoop/hadoop.env
+
+    volumes:
+      - ./hadoop/namenode:/hadoop/dfs/name
+
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+
+    restart: unless-stopped
+
+    depends_on:
+      - namenode
+
+    env_file:
+      - ./hadoop/hadoop.env
+
+    volumes:
+      - ./hadoop/datanode:/hadoop/dfs/data
 
 volumes:
   mysql_data:
