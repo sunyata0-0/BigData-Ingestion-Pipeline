@@ -27,3 +27,15 @@ nifi/provenance_repository/
 
 # Docker
 *.pid
+
+# Hadoop runtime data
+hadoop/namenode/current/
+hadoop/namenode/in_use.lock
+hadoop/datanode/current/
+hadoop/datanode/in_use.lock
+
+# Airflow logs
+airflow/logs/
+
+# Docker Desktop shortcut
+Docker Desktop.lnk
