@@ -46,7 +46,7 @@ services:
     environment:
       SINGLE_USER_CREDENTIALS_USERNAME: mahdi
       SINGLE_USER_CREDENTIALS_PASSWORD: "mahdi2003,///"
-      NIFI_WEB_PROXY_HOST: localhost:8444
+      NIFI_WEB_PROXY_HOST: localhost:8444,nifi:8443
 
     volumes:
       - ./data:/data
@@ -175,9 +175,16 @@ services:
     environment:
       SERVICE_NAME: hiveserver2
       HIVE_CUSTOM_CONF_DIR: /hive-conf
+      DB_DRIVER: mysql
+      SERVICE_OPTS: >
+        -Djavax.jdo.option.ConnectionURL=jdbc:mysql://mysql:3306/hive?createDatabaseIfNotExist=true
+        -Djavax.jdo.option.ConnectionDriverName=com.mysql.cj.jdbc.Driver
+        -Djavax.jdo.option.ConnectionUserName=root
+        -Djavax.jdo.option.ConnectionPassword=root
 
     volumes:
       - ./hadoop/config:/hive-conf
+      - ./hive/jdbc/mysql-connector-j-9.6.0.jar:/opt/hive/lib/mysql-connector-j-9.6.0.jar
 
 
 volumes:
