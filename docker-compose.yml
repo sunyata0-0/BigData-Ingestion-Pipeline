@@ -158,6 +158,26 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./data:/opt/airflow/data
+    
+  hive:
+    image: apache/hive:4.1.0
+    container_name: hive
+
+    restart: unless-stopped
+
+    depends_on:
+      - namenode
+
+    ports:
+      - "10000:10000"
+      - "10002:10002"
+
+    environment:
+      SERVICE_NAME: hiveserver2
+      HIVE_CUSTOM_CONF_DIR: /hive-conf
+
+    volumes:
+      - ./hadoop/config:/hive-conf
 
 
 volumes:
