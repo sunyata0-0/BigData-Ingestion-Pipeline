@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<authorizations>
+  <policies>
+    <policy action="R" identifier="677da9b4-f662-33a8-995d-104872e8df9c" resource="/flow">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="R" identifier="00af9d86-24f7-3e23-ba3d-d4afbc5973b1" resource="/data/process-groups/6b73d8de-019f-1000-fdca-36ab498887b6">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="W" identifier="01433ab4-fd44-3456-a4c7-9c2bffa88baa" resource="/data/process-groups/6b73d8de-019f-1000-fdca-36ab498887b6">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="R" identifier="1db75b97-3f1e-3da7-a199-c5379f293fb1" resource="/process-groups/6b73d8de-019f-1000-fdca-36ab498887b6">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="W" identifier="d3890a00-156e-30a5-be2d-b94579f4e0fc" resource="/process-groups/6b73d8de-019f-1000-fdca-36ab498887b6">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="R" identifier="efb8f75d-f665-3d21-9050-de80d7087730" resource="/tenants">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="W" identifier="ff6a9ebc-1003-3ccd-8119-533f6d0dce89" resource="/tenants">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="R" identifier="d3fa70ef-ce76-3fee-82b5-70869e43c4a1" resource="/policies">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="W" identifier="f38b5430-6559-3217-9e1d-ed6627119cca" resource="/policies">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="R" identifier="e741705f-90f8-3683-aa11-6f991e977ea8" resource="/controller">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+    <policy action="W" identifier="5894ddff-620f-3eb0-9770-b8004ce30b00" resource="/controller">
+      <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d"/>
+    </policy>
+  </policies>
+</authorizations>

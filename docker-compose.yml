@@ -47,13 +47,14 @@ services:
       SINGLE_USER_CREDENTIALS_USERNAME: mahdi
       SINGLE_USER_CREDENTIALS_PASSWORD: "mahdi2003,///"
       NIFI_WEB_PROXY_HOST: localhost:8444,nifi:8443
+      NIFI_SENSITIVE_PROPS_KEY: Bg7mEEFaY9q8BJ8OXFfLrfmL0F+10778
 
     volumes:
       - ./data:/data
       - ./nifi/extensions:/opt/nifi/nifi-current/nar_extensions
       - ./nifi/jdbc:/opt/nifi/nifi-current/jdbc
       - ./hadoop/config:/opt/nifi/hadoop-conf
-      - nifi_conf:/opt/nifi/nifi-current/conf
+      - ./nifi/conf:/opt/nifi/nifi-current/conf
       - nifi_state:/opt/nifi/nifi-current/state
       - nifi_database:/opt/nifi/nifi-current/database_repository
       - nifi_flowfile:/opt/nifi/nifi-current/flowfile_repository
@@ -185,6 +186,30 @@ services:
     volumes:
       - ./hadoop/config:/hive-conf
       - ./hive/jdbc/mysql-connector-j-9.6.0.jar:/opt/hive/lib/mysql-connector-j-9.6.0.jar
+  
+
+  ldap:
+    image: osixia/openldap:1.5.0
+    container_name: ldap
+    environment:
+      LDAP_ORGANISATION: "Internship"
+      LDAP_DOMAIN: "intern.local"
+      LDAP_ADMIN_PASSWORD: admin
+    ports:
+      - "389:389"
+    volumes:
+      - ldap_database:/var/lib/ldap
+      - ldap_config:/etc/ldap/slapd.d
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:0.9.0
+    container_name: phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap
+    ports:
+      - "8085:443"
+    depends_on:
+      - ldap
 
 
 volumes:
@@ -196,3 +221,5 @@ volumes:
   nifi_content:
   nifi_provenance:
   airflow_postgres_data:
+  ldap_database:
+  ldap_config:

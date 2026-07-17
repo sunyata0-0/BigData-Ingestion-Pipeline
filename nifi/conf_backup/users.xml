@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tenants>
+  <groups>
+    <group identifier="6f69ebdc-019f-1000-d81c-65e8453e8773" name="viewer">
+      <user identifier="6f690295-019f-1000-5e4b-eff3ebd5e37b"/>
+    </group>
+  </groups>
+  <users>
+    <user identifier="f9c24b8f-961d-3884-9a98-38cca5274d8d" identity="mahdi"/>
+    <user identifier="6f690295-019f-1000-5e4b-eff3ebd5e37b" identity="_"/>
+  </users>
+</tenants>
