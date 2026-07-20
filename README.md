@@ -22,16 +22,18 @@ The project follows a modular architecture inspired by production data engineeri
                             |
                             v
                   +-------------------+
-                  | File Ingestion PG |
-                  +-------------------+
-                            |
-                            |
-                            +----------------------+
-                                                   |
-                                                   |
+                  | File Ingestion PG |------------+
                   +-------------------+            |
-                  | JDBC Ingestion PG |------------+
-                  +-------------------+
+                            ^                      |
+                            |                      |
+                            |                      |
+                            |                      |
+                            |                      |
+                  +-------------------+            |
+                  | JDBC Ingestion PG |            |
+                  +-------------------+            |
+                                                   |
+                            +----------------------+
                             |
                             v
                     Unified CSV Output
@@ -43,10 +45,10 @@ The project follows a modular architecture inspired by production data engineeri
                     +----------------+
                             |
                             v
-                    Hadoop HDFS
+                        Hadoop HDFS
                             |
                             v
-                         Apache Hive
+                        Apache Hive
 
 
                +-----------------------------+
@@ -62,7 +64,7 @@ The project follows a modular architecture inspired by production data engineeri
 
             +-------------------------------+
             |            LDAP               |
-            |  NiFi Authentication         |
+            |      NiFi Authentication      |
             +-------------------------------+
 ```
 
@@ -210,29 +212,29 @@ bigdata-ingestion-pipeline/
 # Workflow
 
 ```
-Input File / Database
+ Input File / Database
           │
           ▼
- File or JDBC Ingestion
+File or JDBC Ingestion
           │
           ▼
- Format Conversion
-(JSON/XML/TXT → CSV)
+  Format Conversion
+  (JSON/XML/TXT → CSV)
           │
           ▼
-Metadata Enrichment
+  Metadata Enrichment
           │
           ▼
- Error Handling
+    Error Handling
           │
           ▼
-      PutHDFS
+       PutHDFS
           │
           ▼
-        HDFS
+         HDFS
           │
           ▼
-        Hive
+         Hive
 ```
 
 ---
