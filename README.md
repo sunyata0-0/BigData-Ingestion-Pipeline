@@ -2,77 +2,169 @@
 
 ## Overview
 
-This project implements an end-to-end Big Data ingestion pipeline using Apache NiFi, Apache Airflow, Hadoop HDFS, Hive, and MySQL.
+This project implements a containerized Big Data ingestion platform built with Apache NiFi, Apache Airflow, Hadoop HDFS, Hive, MySQL, and LDAP authentication.
 
-The pipeline automatically ingests CSV files, validates them, stores them in HDFS using a partitioned directory structure, updates Hive metadata, and orchestrates the entire workflow with Airflow.
+The platform supports ingesting data from multiple sources (flat files and relational databases), converts supported formats into a common CSV representation, stores the data in HDFS using a partitioned directory structure, and orchestrates the entire workflow with Apache Airflow.
 
-The goal of this project is to demonstrate a production-inspired data ingestion architecture that is modular, scalable, and easy to maintain.
+The project follows a modular architecture inspired by production data engineering pipelines, emphasizing maintainability, scalability, and separation of responsibilities.
 
 ---
 
 # Architecture
 
 ```
-                CSV Files
-                     │
-                     ▼
-               Apache NiFi
-                     │
-     ┌───────────────┼────────────────┐
-     │               │                │
- Validation      Error Handling    Logging
-     │
-     ▼
- HDFS (Partitioned Storage)
-     │
-     ▼
- Apache Hive (External Tables)
-     │
- Metadata stored in MySQL
-     │
-     ▼
- SQL Analytics
+                   +----------------+
+                   |  Input Files   |
+                   | CSV JSON XML   |
+                   | TXT (Delimited)|
+                   +--------+-------+
+                            |
+                            |
+                            v
+                  +-------------------+
+                  | File Ingestion PG |
+                  +-------------------+
+                            |
+                            |
+                            +----------------------+
+                                                   |
+                                                   |
+                  +-------------------+            |
+                  | JDBC Ingestion PG |------------+
+                  +-------------------+
+                            |
+                            v
+                    Unified CSV Output
+                            |
+                            v
+                    +----------------+
+                    |   Storage PG   |
+                    |    PutHDFS     |
+                    +----------------+
+                            |
+                            v
+                    Hadoop HDFS
+                            |
+                            v
+                         Apache Hive
 
-Apache Airflow
-      │
-      └── Orchestrates the entire pipeline
+
+               +-----------------------------+
+               |       Apache Airflow        |
+               |-----------------------------|
+               | • Starts required services  |
+               | • Waits for dependencies    |
+               | • Launches NiFi pipeline    |
+               | • Runtime monitoring        |
+               | • Discord notifications     |
+               +-----------------------------+
+
+
+            +-------------------------------+
+            |            LDAP               |
+            |  NiFi Authentication         |
+            +-------------------------------+
 ```
 
 ---
 
 # Technologies
 
-* Apache NiFi
-* Apache Airflow
-* Apache Hive
-* Hadoop HDFS
-* MySQL
-* Docker & Docker Compose
-* Python
+- Apache NiFi
+- Apache Airflow
+- Hadoop HDFS
+- Apache Hive
+- MySQL
+- OpenLDAP
+- phpLDAPadmin
+- phpMyAdmin
+- Docker & Docker Compose
+- Python
 
 ---
 
 # Features
 
-* Automated CSV ingestion
-* Validation of incoming files
-* Invalid file quarantine
-* Dynamic HDFS partitioning
+## Data Sources
+
+- Flat file ingestion
+- JDBC incremental ingestion
+
+## Supported Formats
+
+- CSV
+- JSON
+- XML
+- Delimited Text (.txt)
+
+All supported formats are converted into a unified CSV format before storage.
+
+---
+
+## Storage
+
+Files are stored inside HDFS using dynamic partitions.
+
+Example:
 
 ```
 /data/csv_source/customers/
-    year=YYYY/
-        month=MM/
-            day=DD/
+    year=2026/
+        month=07/
+            day=20/
 ```
 
-* Automatic Hive partition discovery
-* External Hive tables
-* Persistent Hive Metastore using MySQL
-* Airflow DAG orchestration
-* Modular NiFi Process Groups
-* Parameterized NiFi configuration
-* Dockerized deployment
+The destination path is generated automatically using NiFi Expression Language.
+
+---
+
+## NiFi Architecture
+
+```
+Main Pipeline
+
+├── Sources
+│   ├── File Ingestion
+│   │   ├── CSV
+│   │   ├── JSON
+│   │   ├── XML
+│   │   └── TXT
+│   │
+│   └── JDBC Ingestion
+│
+├── Storage
+│   └── PutHDFS
+│
+├── Error Handling
+│   ├── Failed Fetch
+│   ├── Retry Exceeded
+│   └── Unsupported Files
+│
+└── Monitoring (ready for future extensions)
+```
+
+---
+
+## Airflow
+
+Airflow orchestrates the pipeline by:
+
+- Starting required Docker containers
+- Waiting until each service is reachable
+- Authenticating with NiFi using LDAP
+- Launching the ingestion Process Group
+- Sending Discord success/failure notifications
+- Reporting pipeline runtime
+
+---
+
+## Authentication
+
+NiFi authentication is delegated to OpenLDAP.
+
+phpLDAPadmin is used to manage LDAP users through a web interface.
+
+Credentials are managed securely using Airflow Variables instead of hardcoded values.
 
 ---
 
@@ -83,17 +175,31 @@ bigdata-ingestion-pipeline/
 
 ├── airflow/
 │   └── dags/
-│       └── ingestion_pipeline.py
+│       ├── final_ingestion_pipeline.py
+│       └── utils/
+│           ├── docker_utils.py
+│           ├── nifi_utils.py
+│           ├── notify_utils.py
+│           └── wait_utils.py
+│
+├── data/
+│   ├── input/
+│   ├── output/
+│   ├── quarantine/
+│   └── archive/
 │
 ├── hadoop/
-│   └── config/
+│   ├── config/
+│   ├── namenode/
+│   └── datanode/
 │
 ├── hive/
 │   └── jdbc/
 │
-├── input/
-├── output/
-├── quarantine/
+├── nifi/
+│   ├── conf/
+│   ├── extensions/
+│   └── jdbc/
 │
 ├── docker-compose.yml
 └── README.md
@@ -103,97 +209,109 @@ bigdata-ingestion-pipeline/
 
 # Workflow
 
-1. A CSV file is placed into the input directory.
-2. NiFi validates the file.
-3. Invalid files are moved to the quarantine folder.
-4. Valid files are uploaded to HDFS.
-5. Files are stored using the following partition structure:
-
 ```
-year=YYYY/month=MM/day=DD/
+Input File / Database
+          │
+          ▼
+ File or JDBC Ingestion
+          │
+          ▼
+ Format Conversion
+(JSON/XML/TXT → CSV)
+          │
+          ▼
+Metadata Enrichment
+          │
+          ▼
+ Error Handling
+          │
+          ▼
+      PutHDFS
+          │
+          ▼
+        HDFS
+          │
+          ▼
+        Hive
 ```
-
-6. Airflow executes:
-
-* Hive partition refresh
-
-```
-MSCK REPAIR TABLE customers;
-```
-
-7. Data becomes immediately available for SQL queries in Hive.
 
 ---
 
-# Hive
+# Docker Services
 
-The project uses an **External Hive Table**.
+The project includes the following services:
 
-The table metadata is stored inside a dedicated MySQL Hive Metastore, while the actual data remains in HDFS.
-
-Example queries:
-
-```sql
-SHOW TABLES;
-
-SHOW PARTITIONS customers;
-
-SELECT * FROM customers;
-
-SELECT COUNT(*) FROM customers;
-
-SELECT *
-FROM customers
-WHERE year='2026'
-AND month='07'
-AND day='16';
-```
+- Apache NiFi
+- Apache Airflow
+- PostgreSQL (Airflow Metadata)
+- Hadoop NameNode
+- Hadoop DataNode
+- Apache Hive
+- MySQL
+- phpMyAdmin
+- OpenLDAP
+- phpLDAPadmin
 
 ---
 
 # Running the Project
 
-Start all services:
+Clone the repository:
+
+```bash
+git clone https://github.com/sunyata0-0/BigData-Ingestion-Pipeline/tree/main
+cd bigdata-ingestion-pipeline
+```
+
+Start the environment:
 
 ```bash
 docker compose up -d
 ```
 
-Stop all services:
+Open the web interfaces:
 
-```bash
-docker compose down
+| Service | URL |
+|----------|-----|
+| NiFi | https://localhost:8444 |
+| Airflow | http://localhost:8082 |
+| phpMyAdmin | http://localhost:8081 |
+| phpLDAPadmin | https://localhost:8085 |
+| NameNode UI | http://localhost:9870 |
+
+Trigger the Airflow DAG:
+
+```
+final_ingestion_pipeline
 ```
 
-Start only Hive:
+The DAG will automatically:
 
-```bash
-docker compose up -d hive
-```
-
-Open Hive:
-
-```bash
-docker exec -it hive beeline -u jdbc:hive2://localhost:10000/
-```
+1. Start required containers (if necessary)
+2. Wait for service readiness
+3. Authenticate to NiFi
+4. Launch the ingestion Process Group
+5. Send a Discord notification with the execution summary
 
 ---
 
 # Future Improvements
 
-* Email notifications from Airflow
-* Enhanced error handling
-* Detailed logging Process Group
-* User authentication and authorization in NiFi
-* Monitoring and alerting
-* Support for additional data formats (JSON, Parquet, Avro)
+- Dedicated Monitoring Process Group
+- Centralized NiFi logging
+- Email notifications
+- Parquet and Avro support
+- Kafka ingestion
+- Spark processing layer
+- Automated Hive table creation
+- Data quality validation
 
 ---
 
 # Author
 
-Mahdi Benhamadi
+**Mahdi Benhamadi**
 
-Engineering Student – Data Science, Big Data & Artificial Intelligence
+Engineering Student — Data Science, Big Data & Artificial Intelligence
 
-Internship Project – Big Data Ingestion Pipeline
+Internship Project — Big Data Ingestion Pipeline
