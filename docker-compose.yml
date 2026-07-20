@@ -159,6 +159,7 @@ services:
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./data:/opt/airflow/data
+      - /var/run/docker.sock:/var/run/docker.sock
     
   hive:
     image: apache/hive:4.1.0
