@@ -60,9 +60,7 @@ def run_ingestion_pipeline():
 
     try:
 
-        # -----------------------------
-        # Start required containers
-        # -----------------------------
+        # Start containers
 
         missing = []
 
@@ -77,16 +75,12 @@ def run_ingestion_pipeline():
                 f"Missing containers: {', '.join(missing)}"
             )
 
-        # -----------------------------
         # Wait until services are ready
-        # -----------------------------
 
         for service, port in PORTS.items():
             wait_for_port(service, port)
 
-        # -----------------------------
         # Login & start NiFi
-        # -----------------------------
 
         token = run_pipeline(
             process_group,
