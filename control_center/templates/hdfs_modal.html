@@ -1,0 +1,73 @@
+<input type="checkbox" id="hdfs-modal-toggle" class="modal-toggle" aria-hidden="true">
+
+<div class="modal" id="hdfs-modal" role="dialog" aria-modal="true" aria-labelledby="hdfs-modal-title">
+
+    <label for="hdfs-modal-toggle" class="modal__backdrop" aria-hidden="true"></label>
+
+    <div class="modal__card modal__card--hdfs" role="document">
+
+        <header class="modal__header">
+            <div>
+                <h2 class="modal__title" id="hdfs-modal-title">HDFS Browser</h2>
+                <p class="modal__subtitle">Browse the Hadoop Distributed File System</p>
+            </div>
+            <label for="hdfs-modal-toggle" class="modal__close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+        </header>
+
+        <div class="modal__body">
+            <div class="file-explorer">
+
+                <div class="file-explorer__toolbar">
+                    <div class="file-explorer__path">
+                        <span class="file-explorer__path-icon" aria-hidden="true">&#128193;</span>
+                        <span class="file-explorer__path-label">Path</span>
+                        <span id="hdfs-current-path" class="file-explorer__path-value">/</span>
+                    </div>
+
+                    <div class="file-explorer__toolbar-actions">
+                        <button type="button" id="hdfs-back-btn" class="modal-btn modal-btn--ghost" disabled aria-disabled="true">
+                            <span aria-hidden="true">&#8592;</span> Back
+                        </button>
+                        <button type="button" id="hdfs-refresh-btn" class="modal-btn">
+                            <span aria-hidden="true">&#8635;</span> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <div class="file-explorer__table-head" aria-hidden="true">
+                    <span></span>
+                    <span>Name</span>
+                    <span>Type</span>
+                    <span>Size</span>
+                    <span>Modified</span>
+                    <span></span>
+                </div>
+
+                <div class="file-explorer__list-wrap">
+
+                    <div id="hdfs-loading-state" class="file-state file-state--loading" hidden>
+                        <span class="file-state__spinner" aria-hidden="true"></span>
+                        <p>Loading directory contents&hellip;</p>
+                    </div>
+
+                    <div id="hdfs-empty-state" class="file-state file-state--empty" hidden>
+                        <span class="file-state__icon" aria-hidden="true">&#128193;</span>
+                        <p>This folder is empty.</p>
+                    </div>
+
+                    <div id="hdfs-error-state" class="file-state file-state--error" hidden>
+                        <span class="file-state__icon" aria-hidden="true">&#9888;&#65039;</span>
+                        <p>Unable to retrieve directory contents.</p>
+                    </div>
+
+                    <div id="hdfs-file-list"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

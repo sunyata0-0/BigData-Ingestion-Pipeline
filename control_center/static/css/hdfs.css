@@ -1,0 +1,253 @@
+@media (prefers-reduced-motion: reduce){
+    .file-state__spinner{ animation-duration: .001ms !important; }
+}
+
+/* Card is a little wider than the default modal — a file table needs
+   the room. */
+.modal__card--hdfs{ max-width: 640px; }
+
+/* modal.css doesn't define a disabled look for .modal-btn (none of the
+   other modals needed one). The Back button here does, so it's scoped
+   locally rather than editing the shared file. If a future modal needs
+   this too, it'd be worth promoting into modal.css instead of
+   duplicating it again. */
+.modal-btn:disabled{
+    opacity: .45;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+}
+
+/* ---------- Explorer shell ---------- */
+.file-explorer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+/* ---------- Toolbar ---------- */
+.file-explorer__toolbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.file-explorer__path{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    background: var(--card-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 7px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+
+.file-explorer__path-icon{ font-size: 13px; flex-shrink: 0; }
+
+.file-explorer__path-label{
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-size: 10px;
+    flex-shrink: 0;
+}
+
+.file-explorer__path-value{
+    color: var(--ink);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-explorer__toolbar-actions{
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.file-explorer__toolbar-actions .modal-btn{
+    padding: 7px 12px;
+    font-size: 11px;
+}
+
+/* ---------- Column header ---------- */
+.file-explorer__table-head{
+    display: grid;
+    grid-template-columns: 28px 1fr 90px 80px 130px 84px;
+    gap: 12px;
+    padding: 0 10px 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--line-soft);
+}
+
+/* ---------- Scrollable list region ---------- */
+.file-explorer__list-wrap{
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    margin-top: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+}
+
+.file-explorer__list-wrap::-webkit-scrollbar{ width: 8px; }
+.file-explorer__list-wrap::-webkit-scrollbar-track{ background: transparent; }
+.file-explorer__list-wrap::-webkit-scrollbar-thumb{
+    background: var(--line);
+    border-radius: 999px;
+}
+.file-explorer__list-wrap::-webkit-scrollbar-thumb:hover{ background: var(--gray); }
+
+/* ---------- States: loading / empty / error ---------- */
+.file-state{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--ink-muted);
+    font-size: 12.5px;
+}
+
+.file-state__icon{ font-size: 22px; }
+
+.file-state__spinner{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    border-top-color: var(--orange);
+    animation: file-state-spin .7s linear infinite;
+}
+
+@keyframes file-state-spin{
+    to{ transform: rotate(360deg); }
+}
+
+.file-state--error{ color: var(--red); }
+
+/* ---------- File rows ---------- */
+/* #hdfs-file-list is populated by JS with .hdfs-row children — see the
+   markup contract documented at the top of hdfs_modal.html. */
+.hdfs-row{
+    display: grid;
+    grid-template-columns: 28px 1fr 90px 80px 130px 84px;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    transition: background .18s ease, border-color .18s ease;
+}
+
+.hdfs-row:hover{
+    background: var(--card-2);
+    border-color: var(--line-soft);
+}
+
+.hdfs-row + .hdfs-row{ margin-top: 2px; }
+
+.hdfs-row__icon{
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.hdfs-row__icon--folder{
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.hdfs-row__icon--file{
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.hdfs-row__name{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hdfs-row__type,
+.hdfs-row__size,
+.hdfs-row__modified{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    white-space: nowrap;
+}
+
+.hdfs-row__action{
+    padding: 6px 10px;
+    font-size: 10.5px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 620px){
+    .modal__card--hdfs{ max-width: 100%; }
+
+    .file-explorer__table-head{
+        grid-template-columns: 24px 1fr 70px;
+    }
+
+    .file-explorer__table-head span:nth-child(4),
+    .file-explorer__table-head span:nth-child(5){
+        display: none;
+    }
+
+    .hdfs-row{
+        grid-template-columns: 24px 1fr auto;
+        grid-template-rows: auto auto;
+    }
+
+    .hdfs-row__icon{
+        grid-column: 1;
+        grid-row: 1 / 3;
+        align-self: center;
+    }
+
+    .hdfs-row__name{
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .hdfs-row__type{
+        grid-column: 2;
+        grid-row: 2;
+        margin-top: 2px;
+    }
+
+    .hdfs-row__action{
+        grid-column: 3;
+        grid-row: 1 / 3;
+        align-self: center;
+    }
+
+    .hdfs-row__size,
+    .hdfs-row__modified{
+        display: none;
+    }
+}

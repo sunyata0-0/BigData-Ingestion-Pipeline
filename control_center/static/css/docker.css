@@ -1,11 +1,3 @@
-/*
-    ============================================================
-    docker-modal.css — Docker-specific only
-    Requires modal.css to be loaded first (uses .modal, .modal__body,
-    .badge, and design tokens from style.css).
-    ============================================================
-*/
-
 @media (prefers-reduced-motion: reduce){
     .service-row__action{ transition-duration: .001ms !important; }
 }

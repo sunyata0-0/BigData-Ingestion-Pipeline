@@ -1,12 +1,3 @@
-/*
-    ============================================================
-    ldap-modal.css — LDAP-specific only
-    Requires modal.css to be loaded first (uses .modal, .modal__card,
-    .modal__footer, .modal-btn, .badge, .form-field, and design tokens
-    from style.css).
-    ============================================================
-*/
-
 /* Card size overrides — the two modals in this feature are wider
    (user grid) and narrower (confirmation dialog) than the default. */
    .modal__card--ldap{ max-width: 560px; }

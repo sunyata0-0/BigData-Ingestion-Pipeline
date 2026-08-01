@@ -1,28 +1,3 @@
-/*
-    ============================================================
-    modal.css — shared modal framework
-    ============================================================
-    Depends on the design tokens already declared in style.css's
-    :root (--paper, --card, --ink, --orange, --font-*, --radius, etc).
-    This file does not redeclare them — it is always loaded on pages
-    that already include style.css.
-
-    Any feature modal is built from three pieces:
-      1. <input class="modal-toggle" id="X-toggle">
-      2. <div class="modal" id="X">  ...containing .modal__card...
-      3. A trigger: <label for="X-toggle" class="modal-btn">Open</label>
-
-    IMPORTANT — why ".modal-toggle:checked + .modal" and not "~":
-    "+" only ever matches the SINGLE element immediately following the
-    checked toggle. With multiple modals on one page, a generic "~"
-    selector matches every later .modal on the page, not just the
-    toggle's own — that was the bug where opening the Docker modal also
-    opened the LDAP modal. Keep the toggle and its .modal as direct,
-    uninterrupted siblings in the HTML and this stays correct no matter
-    how many modals get added later.
-    ============================================================
-*/
-
 @media (prefers-reduced-motion: reduce){
     .modal, .modal__card, .modal-btn{ transition-duration: .001ms !important; }
 }
@@ -342,4 +317,9 @@
     }
 
     .modal__actions .modal-btn{ width: 100%; }
+}
+
+
+[hidden] {
+    display: none !important;
 }

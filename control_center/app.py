@@ -4,6 +4,9 @@ from blueprints.dashboard import dashboard_bp
 from blueprints.upload import upload_bp
 from blueprints.airflow import airflow_bp
 from blueprints.docker import docker_bp
+from blueprints.ldap import ldap_bp
+from blueprints.hdfs import hdfs_bp
+from blueprints.hive import hive_bp
 
 app = Flask(__name__)
 
@@ -13,6 +16,9 @@ app.register_blueprint(dashboard_bp)
 app.register_blueprint(upload_bp)
 app.register_blueprint(airflow_bp)
 app.register_blueprint(docker_bp)
+app.register_blueprint(ldap_bp)
+app.register_blueprint(hdfs_bp)
+app.register_blueprint(hive_bp)
 
 if __name__ == "__main__":
     app.run(debug=False)

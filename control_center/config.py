@@ -16,6 +16,9 @@ MYSQL_DATABASE = "bigdata"
 # Hive
 HIVE_HOST = "localhost"
 HIVE_PORT = 10000
+HIVE_CONTAINER = "hive"
+HIVE_DATABASE = "ingestion"
+HIVE_TABLE = "customers"
 
 # Upload folder
 UPLOAD_FOLDER = "C:/Users/M-S-I/Desktop/internship/bigdata-ingestion-pipeline/data/input"
@@ -27,7 +30,13 @@ AIRFLOW_PASSWORD = "admin"
 DAG_ID = "final_ingestion_pipeline"
 
 # LDAP
-LDAP_HOST = "ldap://localhost:389"
+LDAP_HOST = "localhost"
+LDAP_PORT = 389
 LDAP_BIND_DN = "cn=admin,dc=intern,dc=local"
-LDAP_PASSWORD = "admin"
-LDAP_BASE_DN = "ou=people,dc=intern,dc=local"
+LDAP_BIND_PASSWORD = "admin"
+LDAP_BASE_DN = "dc=intern,dc=local"
+LDAP_ADMIN_PASSWORD = "mahdi2003,///"
+LDAP_VIEWER_PASSWORD = "viewer123"
+
+# HDFS
+HDFS_CONTAINER = "namenode"

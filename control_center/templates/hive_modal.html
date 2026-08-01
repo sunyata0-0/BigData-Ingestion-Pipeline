@@ -1,0 +1,204 @@
+<input type="checkbox" id="hive-modal-toggle" class="modal-toggle" aria-hidden="true">
+
+<div class="modal" id="hive-modal" role="dialog" aria-modal="true" aria-labelledby="hive-modal-title">
+
+    <label for="hive-modal-toggle" class="modal__backdrop" aria-hidden="true"></label>
+
+    <div class="modal__card modal__card--hive" role="document">
+
+        <header class="modal__header">
+            <div>
+                <h2 class="modal__title" id="hive-modal-title">Hive Explorer</h2>
+                <p class="modal__subtitle">Browse warehouse metadata and preview data.</p>
+            </div>
+            <label for="hive-modal-toggle" class="modal__close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+        </header>
+
+        <div class="modal__body">
+            <div class="hive-explorer">
+
+                <div class="hive-actions">
+                    <button type="button" id="hive-databases-btn" class="hive-action">
+                        <span class="hive-action__icon" aria-hidden="true">&#128451;&#65039;</span>
+                        <span id="hive-btn-databases" class="hive-action__label">Databases</span>
+                    </button>
+
+                    <button type="button" id="hive-tables-btn" class="hive-action">
+                        <span class="hive-action__icon" aria-hidden="true">&#128203;</span>
+                        <span id="hive-btn-tables" class="hive-action__label">Tables</span>
+                    </button>
+
+                    <button type="button" id="hive-schema-btn" class="hive-action">
+                        <span class="hive-action__icon" aria-hidden="true">&#128208;</span>
+                        <span id="hive-btn-schema" class="hive-action__label">Schema</span>
+                    </button>
+
+                    <button type="button" id="hive-preview-btn" class="hive-action">
+                        <span class="hive-action__icon" aria-hidden="true">&#128065;</span>
+                        <span id="hive-btn-preview" class="hive-action__label">Preview Data</span>
+                    </button>
+                </div>
+
+                <div id="hive-output" class="hive-output">
+
+                    <!-- Default state -->
+                    <div id="hive-output-placeholder" class="hive-output__state hive-output__state--placeholder">
+                        <span class="hive-output__icon" aria-hidden="true">&#128451;&#65039;</span>
+                        <p>Select an action.</p>
+                    </div>
+
+                    <!-- Databases list (placeholder data) -->
+                    <div id="hive-output-databases" class="hive-output__state" hidden>
+                        <p class="hive-output__heading">Databases</p>
+                        <ul class="hive-list">
+                            <li class="hive-list__item">
+                                <span class="hive-list__icon" aria-hidden="true">&#128451;&#65039;</span>
+                                <span class="hive-list__name">default</span>
+                                <span class="hive-list__meta">12 tables</span>
+                            </li>
+                            <li class="hive-list__item">
+                                <span class="hive-list__icon" aria-hidden="true">&#128451;&#65039;</span>
+                                <span class="hive-list__name">staging</span>
+                                <span class="hive-list__meta">5 tables</span>
+                            </li>
+                            <li class="hive-list__item">
+                                <span class="hive-list__icon" aria-hidden="true">&#128451;&#65039;</span>
+                                <span class="hive-list__name">warehouse</span>
+                                <span class="hive-list__meta">8 tables</span>
+                            </li>
+                            <li class="hive-list__item">
+                                <span class="hive-list__icon" aria-hidden="true">&#128451;&#65039;</span>
+                                <span class="hive-list__name">analytics</span>
+                                <span class="hive-list__meta">3 tables</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tables list (placeholder data) -->
+                    <div id="hive-output-tables" class="hive-output__state" hidden>
+                        <p class="hive-output__heading">Tables <span class="hive-output__heading-scope">in warehouse</span></p>
+                        <ul class="hive-list">
+                            <li class="hive-list__item">
+                                <span class="hive-list__icon" aria-hidden="true">&#128203;</span>
+                                <span class="hive-list__name">employees</span>
+                                <span class="hive-list__meta">Managed &middot; 5 columns</span>
+                            </li>
+                            <li class="hive-list__item">
+                                <span class="hive-list__icon" aria-hidden="true">&#128203;</span>
+                                <span class="hive-list__name">raw_sales</span>
+                                <span class="hive-list__meta">External &middot; 9 columns</span>
+                            </li>
+                            <li class="hive-list__item">
+                                <span class="hive-list__icon" aria-hidden="true">&#128203;</span>
+                                <span class="hive-list__name">dim_customers</span>
+                                <span class="hive-list__meta">Managed &middot; 6 columns</span>
+                            </li>
+                            <li class="hive-list__item">
+                                <span class="hive-list__icon" aria-hidden="true">&#128203;</span>
+                                <span class="hive-list__name">fact_orders</span>
+                                <span class="hive-list__meta">Managed &middot; 11 columns</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Schema (placeholder data) — column names for `employees` -->
+                    <div id="hive-output-schema" class="hive-output__state" hidden>
+                        <p class="hive-output__heading">Schema <span class="hive-output__heading-scope">employees</span></p>
+                        <div class="hive-table-wrap">
+                            <table class="hive-table">
+                                <thead>
+                                    <tr>
+                                        <th>Column</th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>id</td>
+                                        <td><span class="badge badge--gray">INT</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>first_name</td>
+                                        <td><span class="badge badge--gray">STRING</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>last_name</td>
+                                        <td><span class="badge badge--gray">STRING</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>department</td>
+                                        <td><span class="badge badge--gray">STRING</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>salary</td>
+                                        <td><span class="badge badge--gray">DECIMAL</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Preview Data (placeholder data) -->
+                    <div id="hive-output-preview" class="hive-output__state" hidden>
+                        <p class="hive-output__heading">Preview <span class="hive-output__heading-scope">employees &middot; first 5 rows</span></p>
+                        <div class="hive-table-wrap">
+                            <table class="hive-table">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>first_name</th>
+                                        <th>last_name</th>
+                                        <th>department</th>
+                                        <th>salary</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Sara</td>
+                                        <td>El Amrani</td>
+                                        <td>Engineering</td>
+                                        <td>42000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Youssef</td>
+                                        <td>Bennani</td>
+                                        <td>Data</td>
+                                        <td>38000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Imane</td>
+                                        <td>Chafik</td>
+                                        <td>Engineering</td>
+                                        <td>45000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Omar</td>
+                                        <td>Tazi</td>
+                                        <td>Finance</td>
+                                        <td>39500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Nadia</td>
+                                        <td>Idrissi</td>
+                                        <td>Data</td>
+                                        <td>41000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

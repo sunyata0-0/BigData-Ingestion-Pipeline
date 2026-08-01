@@ -1,0 +1,215 @@
+/*
+    ============================================================
+    hive_modal.css — Hive-specific only
+    Requires modal.css to be loaded first (uses .modal, .modal__card,
+    .modal__body, .modal-btn, .badge, and design tokens from style.css).
+    ============================================================
+*/
+
+@media (prefers-reduced-motion: reduce){
+    .hive-action{ transition-duration: .001ms !important; }
+}
+
+/* A metadata browser + table preview needs a bit more room than the
+   default modal width. */
+.modal__card--hive{ max-width: 680px; }
+
+/* ---------- Explorer shell ---------- */
+.hive-explorer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+/* ---------- Action buttons ---------- */
+.hive-actions{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.hive-action{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 10px;
+    background: var(--card-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    color: var(--ink);
+    transition: border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.hive-action:hover{
+    border-color: var(--orange-soft);
+    background: var(--card);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -18px rgba(234,88,12,.3);
+}
+
+.hive-action__icon{ font-size: 22px; }
+
+.hive-action__label{
+    font-size: 11px;
+    letter-spacing: .02em;
+    text-align: center;
+}
+
+/* ---------- Output panel ---------- */
+.hive-output{
+    flex: 1;
+    min-height: 260px;
+    max-height: 100%;
+    overflow-y: auto;
+    background: var(--card-2);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+}
+
+.hive-output::-webkit-scrollbar{ width: 8px; }
+.hive-output::-webkit-scrollbar-track{ background: transparent; }
+.hive-output::-webkit-scrollbar-thumb{
+    background: var(--line);
+    border-radius: 999px;
+}
+.hive-output::-webkit-scrollbar-thumb:hover{ background: var(--gray); }
+
+/* ---------- Output states ---------- */
+.hive-output__state--placeholder{
+    height: 100%;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 12.5px;
+}
+
+.hive-output__icon{ font-size: 26px; opacity: .6; }
+
+.hive-output__heading{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.hive-output__heading-scope{
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ---------- Databases / Tables list ---------- */
+.hive-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hive-list__item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    transition: background .18s ease, border-color .18s ease;
+}
+
+.hive-list__item:hover{
+    background: var(--card);
+    border-color: var(--line-soft);
+}
+
+.hive-list__icon{ font-size: 15px; flex-shrink: 0; }
+
+.hive-list__name{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hive-list__meta{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-faint);
+    flex-shrink: 0;
+}
+
+/* ---------- Schema / Preview table ---------- */
+.hive-table-wrap{
+    overflow-x: auto;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+}
+
+.hive-table{
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.hive-table thead th{
+    position: sticky;
+    top: 0;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    background: var(--card);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.hive-table tbody td{
+    padding: 9px 14px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.hive-table tbody tr:last-child td{ border-bottom: none; }
+
+.hive-table tbody tr:nth-child(even){ background: var(--card-2); }
+
+.hive-table tbody tr:hover{ background: var(--orange-soft); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px){
+    .modal__card--hive{ max-width: 100%; }
+
+    .hive-actions{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 420px){
+    .hive-output{ padding: 12px; }
+
+    .hive-list__meta{ display: none; }
+}
