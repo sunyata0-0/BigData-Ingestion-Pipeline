@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% include "docker_modal.html" %}
+
+{% include "ldap_modal.html" %}
+
+<div class="page">
+
+    <div class="main">
+
+        <header class="cc-header">
+            <div class="cc-heading">
+                <span class="cc-eyebrow">Platform Status · Operational</span>
+                <h1>Big Data Control Center</h1>
+                <p>How data moves through the ingestion pipeline, end to end</p>
+            </div>
+
+            <a href="#" class="readme-tab">
+                <span class="readme-tab__icon">&#128214;</span>
+                <span class="readme-tab__text">
+                    <strong>README</strong>
+                    <small>Documentation</small>
+                </span>
+            </a>
+        </header>
+
+        <div class="flow">
+
+            <!-- ===== Data Sources ===== -->
+            <section class="sources">
+                <p class="flow-label">Data Sources</p>
+
+                <div class="sources__grid">
+                    <article class="node node--source">
+                        <div class="node__top">
+                            <span class="node__icon">&#128194;</span>
+                            <span class="status status--idle"><i></i>Ready</span>
+                        </div>
+                        <h2>File Ingestion</h2>
+                        <p class="node__desc">Manual drops picked up by NiFi — CSV, JSON, XML &amp; delimited</p>
+                        <div class="node__actions">
+                            <form id="upload-form" enctype="multipart/form-data">
+
+                                <input
+                                    type="file"
+                                    id="file-input"
+                                    name="file"
+                                    hidden
+                                >
+                            
+                                <button
+                                    type="button"
+                                    id="upload-btn"
+                                >
+                                    Upload File
+                                </button>
+                            
+                            </form>
+                        </div>
+                    </article>
+
+                    <article class="node node--source">
+                        <div class="node__top">
+                            <span class="node__icon">&#128044;</span>
+                            <span class="status status--running"><i></i>Monitoring</span>
+                        </div>
+                        <h2>MySQL Source</h2>
+                        <p class="node__desc">Operational database — NiFi watches for new rows</p>
+                        <div class="node__actions">
+                            <button type="button">Browse Tables</button>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="merge" aria-hidden="true">
+                    <span class="merge__stub merge__stub--left"></span>
+                    <span class="merge__stub merge__stub--right"></span>
+                    <span class="merge__bar"></span>
+                    <span class="merge__trunk"><i class="chev"></i></span>
+                </div>
+            </section>
+
+            <!-- ===== Airflow — orchestrator, kicks the workflow off ===== -->
+            <article class="node node--airflow">
+                <div class="node__top">
+                    <span class="node__icon">&#127761;</span>
+                    <span class="status status--running"><i></i>Scheduled</span>
+                </div>
+                <h2>Airflow</h2>
+                <p class="node__desc">Starts &amp; supervises the workflow</p>
+                <div class="node__actions">
+                    <button
+                        id="run-workflow-btn"
+                        type="button"
+                    >
+                        Start Pipeline
+                    </button>
+                </div>
+            </article>
+
+            <div class="link link--ctrl" aria-hidden="true">
+                <span class="link__label">starts workflow</span>
+                <i class="chev chev--ctrl"></i>
+            </div>
+
+            <!-- ===== NiFi ===== -->
+            <article class="node node--nifi">
+                <div class="node__top">
+                    <span class="node__icon">&#9881;&#65039;</span>
+                    <span class="status status--running"><i></i>Running</span>
+                </div>
+                <h2>Apache NiFi</h2>
+                <p class="node__desc">Ingests &amp; transforms incoming data</p>
+                <div class="node__actions">
+                    <button type="button">Run Pipeline</button>
+                </div>
+            </article>
+
+            <div class="link link--data" aria-hidden="true"><i class="chev"></i></div>
+
+            <!-- ===== HDFS ===== -->
+            <article class="node node--hdfs">
+                <div class="node__top">
+                    <span class="node__icon">&#128190;</span>
+                    <span class="status status--running"><i></i>Online</span>
+                </div>
+                <h2>HDFS</h2>
+                <p class="node__desc">Stores raw &amp; staged data</p>
+                <div class="node__actions">
+                    <button type="button">Browse</button>
+                </div>
+            </article>
+
+            <div class="link link--data" aria-hidden="true"><i class="chev"></i></div>
+
+            <!-- ===== Hive ===== -->
+            <article class="node node--hive">
+                <div class="node__top">
+                    <span class="node__icon">&#128452;&#65039;</span>
+                    <span class="status status--running"><i></i>Online</span>
+                </div>
+                <h2>Hive</h2>
+                <p class="node__desc">Reads &amp; catalogs data from HDFS</p>
+                <div class="node__actions">
+                    <button type="button">Preview Tables</button>
+                </div>
+            </article>
+
+            <div class="link link--data" aria-hidden="true"><i class="chev"></i></div>
+
+            <!-- ===== Discord Notification ===== -->
+            <article class="node node--discord">
+                <div class="node__top">
+                    <span class="node__icon">&#128225;</span>
+                    <span class="status status--running"><i></i>Connected</span>
+                </div>
+                <h2>Discord Notification</h2>
+                <p class="node__desc">Reports pipeline status when the run ends</p>
+                <div class="node__actions">
+                    <button type="button">View Logs</button>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- ===== Supporting Services ===== -->
+        <section class="supporting">
+            <p class="flow-label">Supporting Services</p>
+
+            <div class="supporting__grid">
+                <article class="support-card">
+                    <div class="support-card__top">
+                        <span class="support-card__icon">&#128051;</span>
+                        <span class="status status--running"><i></i>Up</span>
+                    </div>
+                    <h3>Docker</h3>
+                    <p>Container runtime hosting every service</p>
+                    <!--button type="button">Containers</button-->
+                    <label
+                        for="docker-modal-toggle"
+                        class="modal-btn modal-btn--full">
+
+                        Containers
+
+                    </label>
+                </article>
+
+                <article class="support-card">
+                    <div class="support-card__top">
+                        <span class="support-card__icon">&#128274;</span>
+                        <span class="status status--running"><i></i>Up</span>
+                    </div>
+                    <h3>LDAP</h3>
+                    <p>Authentication for NiFi</p>
+                    <label for="ldap-modal-toggle" class="modal-btn modal-btn--full">Users</label>
+                    <!--button type="button">Users</button-->
+                </article>
+
+                <article class="support-card">
+                    <div class="support-card__top">
+                        <span class="support-card__icon">&#128451;&#65039;</span>
+                        <span class="status status--running"><i></i>Up</span>
+                    </div>
+                    <h3>Hive Metastore <small>(MySQL)</small></h3>
+                    <p>Stores Hive metadata</p>
+                    <button type="button">Status</button>
+                </article>
+
+                <article class="support-card">
+                    <div class="support-card__top">
+                        <span class="support-card__icon">&#128024;</span>
+                        <span class="status status--running"><i></i>Up</span>
+                    </div>
+                    <h3>Airflow Metadata <small>(PostgreSQL)</small></h3>
+                    <p>Stores Airflow metadata</p>
+                    <button type="button">Status</button>
+                </article>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ===== Pipeline Activity ===== -->
+    <aside class="activity">
+        <div class="activity__head">
+            <h2>Pipeline Activity</h2>
+            <span class="status status--running"><i></i>Live</span>
+        </div>
+
+        <ul class="log">
+            <li class="log__item">
+                <span class="log__time">14:35:18</span>
+                <span class="log__msg">Workflow started</span>
+            </li>
+            <li class="log__item">
+                <span class="log__time">14:35:21</span>
+                <span class="log__msg">File uploaded</span>
+            </li>
+            <li class="log__item">
+                <span class="log__time">14:35:25</span>
+                <span class="log__msg">NiFi processing&hellip;</span>
+            </li>
+            <li class="log__item">
+                <span class="log__time">14:35:31</span>
+                <span class="log__msg">Data written to HDFS</span>
+            </li>
+            <li class="log__item">
+                <span class="log__time">14:35:36</span>
+                <span class="log__msg">Hive refreshed</span>
+            </li>
+            <li class="log__item log__item--latest">
+                <span class="log__time">14:35:37</span>
+                <span class="log__msg">Discord notification sent</span>
+            </li>
+        </ul>
+    </aside>
+
+</div>
+<script>
+
+    const button = document.getElementById("run-workflow-btn");
+    
+    button.addEventListener("click", async () => {
+    
+        button.disabled = true;
+        button.textContent = "Starting...";
+    
+        try {
+    
+            const response = await fetch("/airflow/run", {
+                method: "POST"
+            });
+    
+            const data = await response.json();
+    
+            if (data.success) {
+    
+                button.textContent = "✓ Pipeline Started";
+    
+            } else {
+    
+                button.textContent = "✗ Failed";
+                console.log(data.message);
+    
+            }
+    
+        } catch (error) {
+    
+            console.error(error);
+            button.textContent = "✗ Error";
+    
+        }
+    
+        setTimeout(() => {
+    
+            button.disabled = false;
+            button.textContent = "Start Pipeline";
+    
+        }, 2500);
+    
+    });
+    
+    </script>
+{% endblock %}

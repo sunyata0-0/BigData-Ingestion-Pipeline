@@ -1,0 +1,85 @@
+<input type="checkbox" id="docker-modal-toggle" class="modal-toggle" aria-hidden="true">
+
+<div class="modal" id="docker-modal" role="dialog" aria-modal="true" aria-labelledby="docker-modal-title">
+
+    <label for="docker-modal-toggle" class="modal__backdrop" aria-hidden="true"></label>
+
+    <div class="modal__card" role="document">
+
+        <header class="modal__header">
+            <div>
+                <h2 class="modal__title" id="docker-modal-title">Docker Services</h2>
+                <p class="modal__subtitle">Logical services running in this environment</p>
+            </div>
+            <label for="docker-modal-toggle" class="modal__close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+        </header>
+        <div class="modal__body">
+            <ul class="service-list">
+
+                <li class="service-row" data-service="Airflow">
+                    <span class="service-row__icon" aria-hidden="true">&#127761;</span>
+                    <span class="service-row__meta">
+                        <span class="service-row__name">Airflow</span>
+                        <span class="service-row__subtitle">3 containers</span>
+                    </span>
+                    <span class="badge">Loading...</span>
+                    <button type="button" class="service-row__action" data-service="Airflow">Restart</button>
+                </li>
+
+                <li class="service-row" data-service="HDFS">
+                    <span class="service-row__icon" aria-hidden="true">&#128190;</span>
+                    <span class="service-row__meta">
+                        <span class="service-row__name">HDFS</span>
+                        <span class="service-row__subtitle">2 containers</span>
+                    </span>
+                    <span class="badge">Loading...</span>
+                    <button type="button" class="service-row__action" data-service="HDFS">Restart</button>
+                </li>
+
+                <li class="service-row" data-service="NiFi">
+                    <span class="service-row__icon" aria-hidden="true">&#9881;&#65039;</span>
+                    <span class="service-row__meta">
+                        <span class="service-row__name">Apache NiFi</span>
+                        <span class="service-row__subtitle">1 container</span>
+                    </span>
+                    <span class="badge">Loading...</span>
+                    <button type="button" class="service-row__action" data-service="NiFi">Restart</button>
+                </li>
+
+                <li class="service-row" data-service="Hive">
+                    <span class="service-row__icon" aria-hidden="true">&#128452;&#65039;</span>
+                    <span class="service-row__meta">
+                        <span class="service-row__name">Hive</span>
+                        <span class="service-row__subtitle">1 container</span>
+                    </span>
+                    <span class="badge">Loading...</span>
+                    <button type="button" class="service-row__action" data-service="Hive">Restart</button>
+                </li>
+
+                <li class="service-row" data-service="MySQL">
+                    <span class="service-row__icon" aria-hidden="true">&#128044;</span>
+                    <span class="service-row__meta">
+                        <span class="service-row__name">MySQL</span>
+                        <span class="service-row__subtitle">2 container</span>
+                    </span>
+                    <span class="badge">Loading...</span>
+                    <button type="button" class="service-row__action" data-service="MySQL">Restart</button>
+                </li>
+
+                <li class="service-row" data-service="LDAP">
+                    <span class="service-row__icon" aria-hidden="true">&#128274;</span>
+                    <span class="service-row__meta">
+                        <span class="service-row__name">LDAP</span>
+                        <span class="service-row__subtitle">2 containers</span>
+                    </span>
+                    <span class="badge">Loading...</span>
+                    <button type="button" class="service-row__action" data-service="LDAP">Restart</button>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<input type="checkbox" id="ldap-modal-toggle" class="modal-toggle" aria-hidden="true">
+
+<div class="modal" id="ldap-modal" role="dialog" aria-modal="true" aria-labelledby="ldap-modal-title">
+
+    <label for="ldap-modal-toggle" class="modal__backdrop" aria-hidden="true"></label>
+
+    <div class="modal__card modal__card--ldap" role="document">
+
+        <header class="modal__header">
+            <div>
+                <h2 class="modal__title" id="ldap-modal-title">LDAP Users</h2>
+                <p class="modal__subtitle">Apache NiFi authenticated users</p>
+            </div>
+            <label for="ldap-modal-toggle" class="modal__close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+        </header>
+        <div class="modal__body">
+            <div class="ldap-user-grid">
+
+                <article class="ldap-user" data-user="mahdi">
+                    <div class="ldap-user__top">
+                        <span class="ldap-user__avatar" aria-hidden="true">&#128081;</span>
+                        <span class="badge badge--green">Administrator</span>
+                    </div>
+                    <h3 class="ldap-user__name">Mahdi</h3>
+                    <dl class="ldap-user__fields">
+                        <div class="ldap-user__field">
+                            <dt>Username</dt>
+                            <dd>mahdi</dd>
+                        </div>
+                        <div class="ldap-user__field">
+                            <dt>Password</dt>
+                            <dd class="ldap-user__password">
+                                <span aria-hidden="true">&#128274;</span>
+                                <span class="ldap-user__dots">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                            </dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <article class="ldap-user" data-user="viewer">
+                    <div class="ldap-user__top">
+                        <span class="ldap-user__avatar" aria-hidden="true">&#128065;</span>
+                        <span class="badge badge--gray">Read-only</span>
+                    </div>
+                    <h3 class="ldap-user__name">Viewer</h3>
+                    <dl class="ldap-user__fields">
+                        <div class="ldap-user__field">
+                            <dt>Username</dt>
+                            <dd>viewer</dd>
+                        </div>
+                        <div class="ldap-user__field">
+                            <dt>Password</dt>
+                            <dd class="ldap-user__password">
+                                <span aria-hidden="true">&#128274;</span>
+                                <span class="ldap-user__dots">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                            </dd>
+                        </div>
+                    </dl>
+                </article>
+
+            </div>
+
+            <footer class="modal__footer">
+                <label for="ldap-confirm-toggle" class=".modal-btn .modal-btn--primary">Reveal Credentials</label>
+            </footer>
+        </div>
+
+    </div>
+</div>
+
+<!-- ===== Nested confirmation dialog ===== -->
+
+<input type="checkbox" id="ldap-confirm-toggle" class="modal-toggle" aria-hidden="true">
+
+<div class="modal modal--confirm" id="ldap-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="ldap-confirm-title">
+
+    <label for="ldap-confirm-toggle" class="modal__backdrop" aria-hidden="true"></label>
+
+    <div class="modal__card modal__card--confirm" role="document">
+
+        <header class="modal__header modal__header--tight">
+            <h2 class="modal__title" id="ldap-confirm-title">Administrator Verification</h2>
+            <label for="ldap-confirm-toggle" class="modal__close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+        </header>
+
+        <p class="modal__text">Enter the administrator password to reveal stored credentials.</p>
+
+        <div class="form-field">
+            <label class="form-field__label" for="ldap-admin-password">Administrator password</label>
+            <input type="password" id="ldap-admin-password" class="form-field__input" placeholder="Enter password" autocomplete="off">
+        </div>
+
+        <div class="modal__actions">
+            <label for="ldap-confirm-toggle" class=".modal-btn .modal-btn--ghost">Cancel</label>
+            <button type="button" class=".modal-btn .modal-btn--primary">Reveal</button>
+        </div>
+
+    </div>
+</div>

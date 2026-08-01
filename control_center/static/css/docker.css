@@ -1,0 +1,121 @@
+/*
+    ============================================================
+    docker-modal.css — Docker-specific only
+    Requires modal.css to be loaded first (uses .modal, .modal__body,
+    .badge, and design tokens from style.css).
+    ============================================================
+*/
+
+@media (prefers-reduced-motion: reduce){
+    .service-row__action{ transition-duration: .001ms !important; }
+}
+
+/* ---------- Service list ---------- */
+.service-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.service-row{
+    display: grid;
+    grid-template-columns: 32px 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    transition: background .18s ease, border-color .18s ease;
+}
+
+.service-row:hover{
+    background: var(--card-2);
+    border-color: var(--line-soft);
+}
+
+.service-row__icon{
+    font-size: 18px;
+    text-align: center;
+}
+
+.service-row__meta{
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.service-row__name{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+}
+
+.service-row__subtitle{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-faint);
+}
+
+/* ---------- Restart button — hidden until row hover ---------- */
+.service-row__action{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .02em;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 6px 10px;
+    background: var(--card);
+    color: var(--ink);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateX(4px);
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+}
+
+.service-row:hover .service-row__action,
+.service-row:focus-within .service-row__action{
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.service-row__action:hover{
+    border-color: var(--orange);
+    background: var(--orange);
+    color: #fff;
+}
+
+/* Disabled state — JS can set the `disabled` attribute while a restart
+   is in flight. Wins over both the default and hover-revealed opacity
+   since ":disabled" is more specific than ".service-row__action" alone. */
+.service-row__action:disabled{
+    opacity: .5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.service-row__action:disabled:hover{
+    border-color: var(--line);
+    background: var(--card);
+    color: var(--ink);
+}
+
+/* ---------- Docker-specific spacing at small widths ---------- */
+@media (max-width: 520px){
+    .service-row{
+        grid-template-columns: 28px 1fr auto;
+        row-gap: 8px;
+    }
+
+    /* No hover on touch — keep the action reachable at all times */
+    .service-row__action{
+        grid-column: 1 / -1;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        width: 100%;
+    }
+}

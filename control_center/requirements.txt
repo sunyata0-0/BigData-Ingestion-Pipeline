@@ -1,0 +1,8 @@
+Flask
+requests
+docker
+PyMySQL
+PyHive
+thrift
+ldap3
+markdown

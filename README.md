@@ -297,6 +297,24 @@ The DAG will automatically:
 
 ---
 
+# Control Center
+
+A lightweight Flask dashboard providing a centralized interface for the ingestion platform.
+
+Features:
+- Upload files to the ingestion input directory
+- Trigger Airflow workflows
+- Monitor Docker services
+- Restart platform services
+- LDAP user management
+- HDFS browser
+- Hive query interface
+- MySQL data insertion
+- NiFi pipeline visualization
+- Discord notification history
+
+---
+
 # Future Improvements
 
 - Dedicated Monitoring Process Group

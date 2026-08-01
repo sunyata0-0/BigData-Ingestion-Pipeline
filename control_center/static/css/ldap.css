@@ -1,0 +1,96 @@
+/*
+    ============================================================
+    ldap-modal.css — LDAP-specific only
+    Requires modal.css to be loaded first (uses .modal, .modal__card,
+    .modal__footer, .modal-btn, .badge, .form-field, and design tokens
+    from style.css).
+    ============================================================
+*/
+
+/* Card size overrides — the two modals in this feature are wider
+   (user grid) and narrower (confirmation dialog) than the default. */
+   .modal__card--ldap{ max-width: 560px; }
+   .modal__card--confirm{ max-width: 380px; }
+   
+   /* ---------- LDAP user cards ---------- */
+   .ldap-user-grid{
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       gap: 16px;
+       margin-bottom: 20px;
+   }
+   
+   .ldap-user{
+       background: var(--card-2);
+       border: 1px solid var(--line-soft);
+       border-radius: var(--radius-sm);
+       padding: 16px;
+       transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+   }
+   
+   .ldap-user:hover{
+       transform: translateY(-2px);
+       border-color: var(--orange-soft);
+       box-shadow: 0 12px 24px -18px rgba(234,88,12,.3);
+   }
+   
+   .ldap-user__top{
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       margin-bottom: 12px;
+   }
+   
+   .ldap-user__avatar{ font-size: 20px; }
+   
+   .ldap-user__name{
+       font-family: var(--font-display);
+       font-weight: 600;
+       font-size: 15px;
+       color: var(--ink);
+       margin-bottom: 12px;
+   }
+   
+   .ldap-user__fields{
+       display: flex;
+       flex-direction: column;
+       gap: 8px;
+   }
+   
+   .ldap-user__field{
+       display: flex;
+       align-items: baseline;
+       justify-content: space-between;
+       gap: 8px;
+   }
+   
+   .ldap-user__field dt{
+       font-family: var(--font-mono);
+       font-size: 10px;
+       letter-spacing: .05em;
+       text-transform: uppercase;
+       color: var(--ink-faint);
+   }
+   
+   .ldap-user__field dd{
+       font-family: var(--font-mono);
+       font-size: 12px;
+       color: var(--ink);
+   }
+   
+   /* ---------- Password reveal section ---------- */
+   .ldap-user__password{
+       display: inline-flex;
+       align-items: center;
+       gap: 6px;
+   }
+   
+   .ldap-user__dots{
+       letter-spacing: 2px;
+       color: var(--ink-muted);
+   }
+   
+   /* ---------- LDAP-specific spacing at small widths ---------- */
+   @media (max-width: 560px){
+       .ldap-user-grid{ grid-template-columns: 1fr; }
+   }
