@@ -1,0 +1,193 @@
+@media (prefers-reduced-motion: reduce){
+    .readme-feature, .readme-tech-chip{ transition-duration: .001ms !important; }
+}
+
+/* Documentation content needs more room than a form or a service list. */
+.modal__card--readme{ max-width: 760px; }
+
+/* ---------- Shell ---------- */
+.readme{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Shared section rhythm — every section after the hero gets a top
+   border + consistent spacing, so scrolling through reads like a
+   documentation page rather than a stack of unrelated blocks. */
+.readme-section{
+    padding-top: 26px;
+    margin-top: 26px;
+    border-top: 1px solid var(--line-soft);
+}
+
+.readme-section__title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.readme-section__desc{
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+/* ---------- 1. Hero ---------- */
+.readme-hero{
+    text-align: center;
+    padding-bottom: 4px;
+}
+
+.readme-hero__title{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 23px;
+    color: var(--ink);
+    margin-bottom: 10px;
+}
+
+.readme-hero__desc{
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    max-width: 52ch;
+    margin: 0 auto 16px;
+}
+
+.readme-hero__badges{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* ---------- 2. Architecture (media placeholders) ---------- */
+.readme-media{
+    width:100%;
+    height:auto;
+    border:1px solid var(--line-soft);
+    border-radius:var(--radius-sm);
+    background:var(--card-2);
+    object-fit:contain;
+}
+
+/* ---------- 4. Control Center (feature grid) ---------- */
+.readme-feature-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+}
+
+.readme-feature{
+    background: var(--card);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.readme-feature:hover{
+    transform: translateY(-2px);
+    border-color: var(--orange-soft);
+    box-shadow: 0 12px 24px -18px rgba(234,88,12,.3);
+}
+
+.readme-feature__icon{
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.readme-feature__title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 6px;
+}
+
+.readme-feature__desc{
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+}
+
+/* ---------- 5. Technologies ---------- */
+.readme-tech-chips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.readme-tech-chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink);
+    background: var(--card-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 12px;
+    transition: border-color .18s ease, transform .18s ease;
+}
+
+.readme-tech-chip:hover{
+    border-color: var(--orange);
+    transform: translateY(-1px);
+}
+
+/* ---------- 6. GitHub ---------- */
+.readme-github{
+    text-align: center;
+}
+
+/* .modal-btn doesn't reset `width` itself, so it inherits style.css's
+   global button{ width:100% } rule — same gotcha as the Discord
+   template pills. Without this override the button would stretch to
+   fill the row instead of sitting centered at its natural size. */
+.readme-github .modal-btn{
+    width: auto;
+}
+
+/* ---------- 7. Footer ---------- */
+.readme-footer{
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid var(--line-soft);
+    text-align: center;
+}
+
+.readme-footer__line{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    line-height: 1.6;
+}
+
+.readme-footer__name{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-top: 4px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 680px){
+    .modal__card--readme{ max-width: 100%; }
+
+    .readme-feature-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 440px){
+    .readme-hero__title{ font-size: 20px; }
+
+    .readme-feature-grid{ grid-template-columns: 1fr; }
+}

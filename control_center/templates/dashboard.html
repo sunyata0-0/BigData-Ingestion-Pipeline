@@ -14,6 +14,8 @@
 
 {% include "discord_modal.html" %}
 
+{% include "readme_modal.html" %}
+
 <div class="page">
 
     <div class="main">
@@ -25,13 +27,25 @@
                 <p>How data moves through the ingestion pipeline, end to end</p>
             </div>
 
-            <a href="#" class="readme-tab">
+            <!--a href="#" class="readme-tab">
                 <span class="readme-tab__icon">&#128214;</span>
                 <span class="readme-tab__text">
                     <strong>README</strong>
                     <small>Documentation</small>
                 </span>
-            </a>
+            </a-->
+            <label
+                for="readme-modal-toggle"
+                class="readme-tab">
+
+                <span class="readme-tab__icon">&#128214;</span>
+
+                <span class="readme-tab__text">
+                    <strong>README</strong>
+                    <small>Documentation</small>
+                </span>
+
+            </label>
         </header>
 
         <div class="flow">
@@ -244,8 +258,91 @@
 
     </div>
 
-    <!-- ===== Pipeline Activity ===== -->
+    <!-- ===== Project Information ===== -->
     <aside class="activity">
+
+        <div class="activity__head">
+            <h2>Project Information</h2>
+        </div>
+
+        <section class="info-section">
+
+            <h3>Developer</h3>
+
+            <p class="info-main">
+                Mahdi Benhamadi
+            </p>
+
+            <p class="info-sub">
+                Engineering Student<br>
+                Data Science • Big Data • AI
+            </p>
+
+        </section>
+
+        <section class="info-section">
+
+            <h3>Internship</h3>
+
+            <p class="info-main">
+                Banque Centrale Populaire
+            </p>
+
+            <p class="info-sub">
+                Big Data Ingestion Pipeline
+            </p>
+
+        </section>
+
+        <section class="info-section">
+
+            <h3>Quick Links</h3>
+
+            <div class="quick-links">
+
+                <a href="https://localhost:8444" target="_blank">
+                    Apache NiFi
+                </a>
+
+                <a href="http://localhost:8082" target="_blank">
+                    Apache Airflow
+                </a>
+
+                <a href="http://localhost:9870" target="_blank">
+                    Hadoop HDFS
+                </a>
+
+                <a href="http://localhost:8081" target="_blank">
+                    phpMyAdmin
+                </a>
+
+                <a href="https://localhost:8085" target="_blank">
+                    phpLDAPadmin
+                </a>
+
+            </div>
+
+        </section>
+
+        <section class="info-section">
+
+            <h3>Repository</h3>
+
+            <a
+                class="github-link"
+                href="https://github.com/sunyata0-0/BigData-Ingestion-Pipeline"
+                target="_blank">
+
+                View on GitHub
+
+            </a>
+
+        </section>
+
+    </aside>
+
+    <!-- ===== Pipeline Activity ===== -->
+    <!--aside class="activity">
         <div class="activity__head">
             <h2>Pipeline Activity</h2>
             <span class="status status--running"><i></i>Live</span>
@@ -277,7 +374,7 @@
                 <span class="log__msg">Discord notification sent</span>
             </li>
         </ul>
-    </aside>
+    </aside-->
 
 </div>
 <script>

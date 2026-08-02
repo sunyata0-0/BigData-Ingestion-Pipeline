@@ -1,0 +1,161 @@
+<input type="checkbox" id="readme-modal-toggle" class="modal-toggle" aria-hidden="true">
+
+<div class="modal" id="readme-modal" role="dialog" aria-modal="true" aria-labelledby="readme-modal-title">
+
+    <label for="readme-modal-toggle" class="modal__backdrop" aria-hidden="true"></label>
+
+    <div class="modal__card modal__card--readme" role="document">
+
+        <header class="modal__header">
+            <div>
+                <h2 class="modal__title" id="readme-modal-title">Project Documentation</h2>
+                <p class="modal__subtitle">Big Data Ingestion Pipeline Overview</p>
+            </div>
+            <label for="readme-modal-toggle" class="modal__close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+        </header>
+
+        <div class="modal__body">
+            <div class="readme">
+
+                <!-- ===== 1. Hero ===== -->
+                <section class="readme-hero">
+                    <h3 class="readme-hero__title">Big Data Ingestion Pipeline</h3>
+                    <p class="readme-hero__desc">
+                        A containerized Big Data ingestion platform built with Apache NiFi, Apache Airflow,
+                        Hadoop HDFS, Hive, MySQL and LDAP authentication, featuring a centralized Flask
+                        Control Center for managing the entire workflow.
+                    </p>
+                    <div class="readme-hero__badges">
+                        <span class="badge badge--gray">Apache NiFi</span>
+                        <span class="badge badge--gray">Airflow</span>
+                        <span class="badge badge--gray">Hadoop</span>
+                        <span class="badge badge--gray">Hive</span>
+                        <span class="badge badge--gray">Docker</span>
+                        <span class="badge badge--gray">Flask Dashboard</span>
+                    </div>
+                </section>
+
+                <!-- ===== 2. Architecture ===== -->
+                <section class="readme-section">
+                    <h4 class="readme-section__title">Architecture</h4>
+                    <p class="readme-section__desc">Complete architecture of the ingestion platform and its centralized Flask Control Center.</p>
+                    <!--img id="readme-architecture" class="readme-media" alt="Architecture diagram placeholder"-->
+                    <img
+                        src="{{ url_for('static', filename='images/architecture.png') }}"
+                        id="readme-architecture"
+                        class="readme-media"
+                        alt="Big Data Ingestion Pipeline Architecture"
+                    >
+                </section>
+
+                <!-- ===== 3. Pipeline Workflow ===== -->
+                <!--section class="readme-section">
+                    <h4 class="readme-section__title">Pipeline Workflow</h4>
+                    <p class="readme-section__desc">The path data takes from ingestion to notification.</p>
+                    <img id="readme-workflow" class="readme-media" alt="Pipeline workflow diagram placeholder">
+                </section-->
+
+                <!-- ===== 4. Control Center ===== -->
+                <section class="readme-section">
+                    <h4 class="readme-section__title">Control Center</h4>
+                    <p class="readme-section__desc">Everything the dashboard lets you do, at a glance.</p>
+
+                    <div class="readme-feature-grid">
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#128193;</span>
+                            <h5 class="readme-feature__title">Upload Files</h5>
+                            <p class="readme-feature__desc">Drop CSV, JSON, XML or delimited files for ingestion.</p>
+                        </article>
+
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#127761;</span>
+                            <h5 class="readme-feature__title">Trigger Airflow</h5>
+                            <p class="readme-feature__desc">Start and supervise the ingestion workflow.</p>
+                        </article>
+
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#128190;</span>
+                            <h5 class="readme-feature__title">Browse HDFS</h5>
+                            <p class="readme-feature__desc">Navigate the distributed file system.</p>
+                        </article>
+
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#128452;&#65039;</span>
+                            <h5 class="readme-feature__title">Explore Hive</h5>
+                            <p class="readme-feature__desc">Browse databases, tables, schema and preview data.</p>
+                        </article>
+
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#128044;</span>
+                            <h5 class="readme-feature__title">Insert MySQL Records</h5>
+                            <p class="readme-feature__desc">Add new rows directly to the database table.</p>
+                        </article>
+
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#128051;</span>
+                            <h5 class="readme-feature__title">Docker Containers</h5>
+                            <p class="readme-feature__desc">View and restart every service container.</p>
+                        </article>
+
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#128274;</span>
+                            <h5 class="readme-feature__title">LDAP Users</h5>
+                            <p class="readme-feature__desc">Review authenticated NiFi users and roles.</p>
+                        </article>
+
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#128225;</span>
+                            <h5 class="readme-feature__title">Discord Notifications</h5>
+                            <p class="readme-feature__desc">Send pipeline status updates to Discord.</p>
+                        </article>
+
+                        <article class="readme-feature">
+                            <span class="readme-feature__icon" aria-hidden="true">&#9881;&#65039;</span>
+                            <h5 class="readme-feature__title">NiFi Pipeline</h5>
+                            <p class="readme-feature__desc">Monitor ingestion and transformation flow.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- ===== 5. Technologies ===== -->
+                <section class="readme-section">
+                    <h4 class="readme-section__title">Technologies</h4>
+                    <div class="readme-tech-chips">
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#9881;&#65039;</span>Apache NiFi</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#127761;</span>Apache Airflow</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128452;&#65039;</span>Hive</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128190;</span>HDFS</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128044;</span>MySQL</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128051;</span>Docker</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128274;</span>LDAP</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#9899;&#65039;</span>Flask</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128013;</span>Python</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128450;&#65039;</span>Apache Hadoop</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128274;</span>OpenLDAP</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128202;</span>phpMyAdmin</span>
+                        <span class="readme-tech-chip"><span aria-hidden="true">&#128101;</span>phpLDAPadmin</span>
+                    </div>
+                </section>
+
+                <!-- ===== 6. GitHub ===== -->
+                <section class="readme-section readme-github">
+                    <button type="button" id="readme-open-github" class="modal-btn modal-btn--primary">
+                        <span aria-hidden="true">&#128025;</span> View GitHub Repository
+                    </button>
+                </section>
+
+                <!-- ===== 7. Footer ===== -->
+                <footer class="readme-footer">
+                    <p class="readme-footer__line">Internship Project</p>
+                    <p class="readme-footer__line">Banque Centrale Populaire</p>
+                    <p class="readme-footer__line">Engineering Student</p>
+                    <p class="readme-footer__name">Mahdi Benhamadi</p>
+                </footer>
+
+            </div>
+        </div>
+
+    </div>
+</div>
