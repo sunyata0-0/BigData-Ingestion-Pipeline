@@ -1,0 +1,116 @@
+@media (prefers-reduced-motion: reduce){
+    .discord-template{ transition-duration: .001ms !important; }
+}
+
+/* ---------- Card size ---------- */
+.modal__card--discord{ max-width: 620px; }
+
+/* ---------- Message textarea ---------- */
+.discord-textarea{
+    font-family: var(--font-mono);
+    min-height: 160px;
+    height: 160px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* ---------- Quick templates ---------- */
+.discord-templates{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 20px;
+}
+
+.discord-template{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .02em;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 10px 5px 8px;
+    background: var(--card-2);
+    cursor: pointer;
+    transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.discord-template:hover{
+    border-color: currentColor;
+    background: var(--card);
+    transform: translateY(-1px);
+}
+
+.discord-template__dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+/* Each template carries its own semantic color; the dot and hover
+   border both pick it up automatically via currentColor. */
+.discord-template--success{ color: #166534; }
+.discord-template--warning{ color: var(--rust); }
+.discord-template--error{ color: #991b1b; }
+.discord-template--info{ color: #1d4ed8; }
+
+/* ---------- Status area ---------- */
+/* Empty by default — the box only appears once JS puts text in it
+   (":empty" no longer matches once there's a text node), so no
+   hidden/visible class toggling is required just to reveal it. */
+.discord-status{
+    margin-top: 4px;
+    padding: 10px 14px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line-soft);
+    background: var(--card-2);
+    color: var(--ink-muted);
+}
+
+.discord-status:empty{
+    display: none;
+    margin-top: 0;
+    padding: 0;
+    border: none;
+}
+
+.discord-status--success{
+    color: #166534;
+    background: #ecfdf3;
+    border-color: #bbf0cf;
+}
+
+.discord-status--error{
+    color: #991b1b;
+    background: #fef2f2;
+    border-color: #fbd0d0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 560px){
+    .modal__card--discord{ max-width: 100%; }
+
+    .discord-templates{ gap: 6px; }
+}
+
+.discord-template--active{
+
+    border-color: currentColor;
+
+    background: var(--card);
+
+    box-shadow: 0 0 0 2px color-mix(in srgb, currentColor 25%, transparent);
+
+    font-weight: 600;
+
+}

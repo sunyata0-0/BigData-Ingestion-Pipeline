@@ -1,0 +1,78 @@
+   .modal__card--mysql{ max-width: 640px; }
+
+   /* ---------- Form layout ---------- */
+   .mysql-form{
+       display: flex;
+       flex-direction: column;
+   }
+   
+   .mysql-form__grid{
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       gap: 16px;
+   }
+   
+   /* ---------- Department select ---------- */
+   .mysql-select-wrap{ position: relative; }
+   
+   .mysql-select{
+       appearance: none;
+       -webkit-appearance: none;
+       -moz-appearance: none;
+       padding-right: 32px;
+       cursor: pointer;
+   }
+   
+   .mysql-select option[value=""]{ color: var(--ink-faint); }
+   
+   .mysql-select-arrow{
+       position: absolute;
+       top: 50%;
+       right: 12px;
+       transform: translateY(-50%);
+       pointer-events: none;
+       color: var(--ink-faint);
+       font-size: 10px;
+   }
+   
+   /* ---------- Status area ---------- */
+   /* Empty by default — the box itself only appears once JS puts text in
+      it (":empty" no longer matches once there's a text node), so no
+      toggling of a hidden/visible class is required just to reveal it. */
+   .mysql-status{
+       margin-top: 16px;
+       padding: 10px 14px;
+       text-align: center;
+       font-family: var(--font-mono);
+       font-size: 12.5px;
+       border-radius: var(--radius-sm);
+       border: 1px solid var(--line-soft);
+       background: var(--card-2);
+       color: var(--ink-muted);
+   }
+   
+   .mysql-status:empty{
+       display: none;
+       margin-top: 0;
+       padding: 0;
+       border: none;
+   }
+   
+   .mysql-status--success{
+       color: #166534;
+       background: #ecfdf3;
+       border-color: #bbf0cf;
+   }
+   
+   .mysql-status--error{
+       color: #991b1b;
+       background: #fef2f2;
+       border-color: #fbd0d0;
+   }
+   
+   /* ---------- Responsive ---------- */
+   @media (max-width: 560px){
+       .modal__card--mysql{ max-width: 100%; }
+   
+       .mysql-form__grid{ grid-template-columns: 1fr; }
+   }

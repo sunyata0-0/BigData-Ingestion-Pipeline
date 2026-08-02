@@ -128,6 +128,8 @@ class HiveService:
         output = self._run_query(f"""
         USE {self.database};
 
+        MSCK REPAIR TABLE customers;
+
         SELECT
         id,
         first_name,
@@ -135,6 +137,7 @@ class HiveService:
         department,
         salary
         FROM {self.table}
+        ORDER BY id ASC
         LIMIT 20;
         """)
 

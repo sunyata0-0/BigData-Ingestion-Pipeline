@@ -10,6 +10,10 @@
 
 {% include "hive_modal.html" %}
 
+{% include "mysql_modal.html" %}
+
+{% include "discord_modal.html" %}
+
 <div class="page">
 
     <div class="main">
@@ -73,7 +77,11 @@
                         <h2>MySQL Source</h2>
                         <p class="node__desc">Operational database — NiFi watches for new rows</p>
                         <div class="node__actions">
-                            <button type="button">Browse Tables</button>
+                            <label
+                                for="mysql-modal-toggle"
+                                class="modal-btn modal-btn--full">
+                                Insert Row
+                            </label>
                         </div>
                     </article>
                 </div>
@@ -169,7 +177,11 @@
                 <h2>Discord Notification</h2>
                 <p class="node__desc">Reports pipeline status when the run ends</p>
                 <div class="node__actions">
-                    <button type="button">View Logs</button>
+                    <label
+                        for="discord-modal-toggle"
+                        class="modal-btn modal-btn--full">
+                        Send Notification
+                    </label>
                 </div>
             </article>
 

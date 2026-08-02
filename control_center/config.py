@@ -9,9 +9,13 @@ HDFS_URL = "http://localhost:9870"
 # MySQL
 MYSQL_HOST = "localhost"
 MYSQL_PORT = 3306
+
+MYSQL_CONTAINER = "mysql"
+MYSQL_DATABASE = "ingestion"
+MYSQL_TABLE = "employees"
+
 MYSQL_USER = "root"
-MYSQL_PASSWORD = ""
-MYSQL_DATABASE = "bigdata"
+MYSQL_PASSWORD = "root"
 
 # Hive
 HIVE_HOST = "localhost"
@@ -40,3 +44,6 @@ LDAP_VIEWER_PASSWORD = "viewer123"
 
 # HDFS
 HDFS_CONTAINER = "namenode"
+
+# Discord
+DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1528433799891783810/fnpsDyR1ZeWgbC-8J3RnTFk8S7QiiMy_DVC1pFQc1BL-monFRse4uv6Pq4E7FBGW7bKM"

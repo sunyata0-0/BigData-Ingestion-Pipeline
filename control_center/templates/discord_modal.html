@@ -1,0 +1,52 @@
+<input type="checkbox" id="discord-modal-toggle" class="modal-toggle" aria-hidden="true">
+
+<div class="modal" id="discord-modal" role="dialog" aria-modal="true" aria-labelledby="discord-modal-title">
+
+    <label for="discord-modal-toggle" class="modal__backdrop" aria-hidden="true"></label>
+
+    <div class="modal__card modal__card--discord" role="document">
+
+        <header class="modal__header">
+            <div>
+                <h2 class="modal__title" id="discord-modal-title">Discord Notifications</h2>
+                <p class="modal__subtitle">Send a notification through the configured Discord webhook.</p>
+            </div>
+            <label for="discord-modal-toggle" class="modal__close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+        </header>
+
+        <div class="modal__body">
+
+            <div class="form-field">
+                <label class="form-field__label" for="discord-message">Message</label>
+                <textarea id="discord-message" name="message" class="form-field__input discord-textarea" placeholder="Enter notification..." rows="6"></textarea>
+            </div>
+
+            <label class="form-field__label" for="discord-message">Theme</label>
+            
+            <div class="discord-templates">
+                <button type="button" id="discord-template-success" class="discord-template discord-template--success">
+                    <span class="discord-template__dot" aria-hidden="true"></span> Success
+                </button>
+                <button type="button" id="discord-template-warning" class="discord-template discord-template--warning">
+                    <span class="discord-template__dot" aria-hidden="true"></span> Warning
+                </button>
+                <button type="button" id="discord-template-error" class="discord-template discord-template--error">
+                    <span class="discord-template__dot" aria-hidden="true"></span> Error
+                </button>
+                <button type="button" id="discord-template-info" class="discord-template discord-template--info">
+                    <span class="discord-template__dot" aria-hidden="true"></span> Info
+                </button>
+            </div>
+
+            <footer class="modal__footer">
+                <button type="button" id="discord-send-btn" class="modal-btn modal-btn--primary">Send Notification</button>
+            </footer>
+
+            <div id="discord-status" class="discord-status" role="status" aria-live="polite"></div>
+
+        </div>
+
+    </div>
+</div>
