@@ -1,0 +1,41 @@
+<input type="checkbox" id="nifi-modal-toggle" class="modal-toggle" aria-hidden="true">
+
+<div class="modal" id="nifi-modal" role="dialog" aria-modal="true" aria-labelledby="nifi-modal-title">
+
+    <label for="nifi-modal-toggle" class="modal__backdrop" aria-hidden="true"></label>
+
+    <div class="modal__card modal__card--nifi" role="document">
+
+        <header class="modal__header">
+
+            <div>
+                <h2 class="modal__title" id="nifi-modal-title">
+                    NiFi Pipeline Diagram
+                </h2>
+        
+                <p class="modal__subtitle">
+                    Drag to move • Mouse wheel to zoom
+                </p>
+            </div>
+        
+            <label for="nifi-modal-toggle"
+                   class="modal__close"
+                   aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+        
+        </header>
+
+        <div class="modal__body">
+
+            <div id="svgViewer">
+                <img
+                    id="nifiSvg"
+                    src="{{ url_for('static', filename='images/nifi-flow.svg') }}"
+                    alt="NiFi Pipeline Diagram">
+            </div>
+            
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,51 @@
+@media (prefers-reduced-motion: reduce){
+    .nifi-group-card, .nifi-crumb{ transition-duration: .001ms !important; }
+}
+
+.modal__card--nifi{
+    max-width:95vw;
+    width: 1440px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px){
+    .modal__card--nifi{ max-width: 100%; }
+
+    .nifi-group-grid,
+    .nifi-proc-grid{ grid-template-columns: 1fr; }
+}
+
+#svgViewer {
+    width: 100%;
+    height: 75vh;
+    overflow: hidden;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    cursor: grab;
+    position: relative;
+}
+
+#svgViewer:active {
+    cursor: grabbing;
+}
+
+#nifiSvg{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:auto;
+    height:auto;
+
+    max-width:none;
+
+    transform-origin:0 0;
+
+    user-select:none;
+    -webkit-user-drag:none;
+
+    pointer-events:none;
+}

@@ -16,6 +16,8 @@
 
 {% include "readme_modal.html" %}
 
+{% include "nifi_modal.html" %}
+
 <div class="page">
 
     <div class="main">
@@ -140,7 +142,11 @@
                 <h2>Apache NiFi</h2>
                 <p class="node__desc">Ingests &amp; transforms incoming data</p>
                 <div class="node__actions">
-                    <button type="button">Run Pipeline</button>
+                    <label
+                        for="nifi-modal-toggle"
+                        class="modal-btn modal-btn--full">
+                        Explore Pipeline
+                    </label>
                 </div>
             </article>
 
