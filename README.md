@@ -26,56 +26,56 @@ To simplify operation and monitoring, a lightweight web-based Control Center was
                                     |
                                     v
 
-                   +----------------+
-                   |  Input Files   |
-                   | CSV JSON XML   |
-                   | TXT Delimited  |
-                   +--------+-------+
-                            |
-                            |
-                            v
-                  +-------------------+
-                  | File Ingestion PG |------------+
-                  +-------------------+            |
-                            ^                      |
-                            |                      |
-                  +-------------------+            |
-                  | JDBC Ingestion PG |            |
-                  +-------------------+            |
-                                                   |
-                            +----------------------+
-                            |
-                            v
-                    Unified CSV Output
-                            |
-                            v
-                    +----------------+
-                    |   Storage PG   |
-                    |    PutHDFS     |
-                    +----------------+
-                            |
-                            v
-                        Hadoop HDFS
-                            |
-                            v
-                        Apache Hive
+                            +----------------+
+                            |  Input Files   |
+                            | CSV JSON XML   |
+                            | TXT Delimited  |
+                            +--------+-------+
+                                     |
+                                     |
+                                     v
+                           +-------------------+
+                           | File Ingestion PG |------------+
+                           +-------------------+            |
+                                     ^                      |
+                                     |                      |
+                           +-------------------+            |
+                           | JDBC Ingestion PG |            |
+                           +-------------------+            |
+                                                            |
+                                     +----------------------+
+                                     |
+                                     v
+                             Unified CSV Output
+                                     |
+                                     v
+                             +----------------+
+                             |   Storage PG   |
+                             |    PutHDFS     |
+                             +----------------+
+                                     |
+                                     v
+                                 Hadoop HDFS
+                                     |
+                                     v
+                                 Apache Hive
 
 
-               +-----------------------------+
-               |       Apache Airflow        |
-               |-----------------------------|
-               | • Starts required services  |
-               | • Waits for dependencies    |
-               | • Launches NiFi pipeline    |
-               | • Runtime monitoring        |
-               | • Discord notifications     |
-               +-----------------------------+
+                        +-----------------------------+
+                        |       Apache Airflow        |
+                        |-----------------------------|
+                        | • Starts required services  |
+                        | • Waits for dependencies    |
+                        | • Launches NiFi pipeline    |
+                        | • Runtime monitoring        |
+                        | • Discord notifications     |
+                        +-----------------------------+
 
 
-            +-------------------------------+
-            |            LDAP               |
-            |      NiFi Authentication      |
-            +-------------------------------+
+                       +-------------------------------+
+                       |            LDAP               |
+                       |      NiFi Authentication      |
+                       +-------------------------------+
 ```
 
 ---
